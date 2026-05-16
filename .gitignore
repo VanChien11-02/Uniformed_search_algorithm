@@ -1,0 +1,12 @@
+# created by virtualenv automatically
+.venv/
+venv/
+ENV/
+
+**/__pycache__/
+*.py[cod]
+
+.idea/
+.vscode/
+
+bfs_console.py
