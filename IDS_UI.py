@@ -1,13 +1,15 @@
+import random
 import copy
 import tkinter as tk
 from tkinter import messagebox
 
-# ==========================================
-# PHẦN 1: THUẬT TOÁN (BACKEND)
-# ==========================================
-start_state = [[2, 8, 3],
-               [1, 6, 4],
-               [7, 0, 5]]
+def random_start_state():
+    nums  = list(range(9))
+    random.shuffle(nums)
+    start= [nums[0:3], nums[3:6], nums[6:9]]
+    return start
+start_state = random_start_state()
+
 goal = [[1, 2, 3],
         [8, 0, 4],
         [7, 6, 5]]
@@ -114,10 +116,6 @@ def Depth_limit_search(problem, i):
     else:
         return None
 
-
-# ==========================================
-# PHẦN 2: GIAO DIỆN TKINTER CÓ HIỆU ỨNG IDS
-# ==========================================
 class IDSPuzzleGUI:
     def __init__(self, root, start_state, goal_state):
         self.root = root
@@ -249,16 +247,14 @@ class IDSPuzzleGUI:
 
     def reset_board(self):
         if self.is_animating or self.is_searching: return
-        self.current_state = copy.deepcopy(self.start_state)
+        self.current_state = random_start_state()
         self.update_board(self.current_state)
         self.depth_label.config(text="Đang chờ lệnh...")
         self.status_label.config(text="Đã Reset bàn cờ", fg="#333")
         self.solve_btn.config(state=tk.NORMAL)
 
 
-# ==========================================
-# CHẠY ỨNG DỤNG
-# ==========================================
+
 if __name__ == "__main__":
     root = tk.Tk()
     app = IDSPuzzleGUI(root, start_state, goal)
